@@ -2,15 +2,15 @@ class User
   include DataMapper::Resource
 
   property :id, Serial
-  property :email, String
+  property :email, String, :unique => true
   property :password_hash, String
   
   def self.authenticate(params)
-    User.first(:email => params[:email], :password_hash => encode(params[:password]))
+    User.first(:email => params[:email], :password_hash => User.encode(params[:password]))
   end
 
   def password=(pw)
-    self.password_hash = encode(pw)
+    self.password_hash = User.encode(pw)
   end
 
   private

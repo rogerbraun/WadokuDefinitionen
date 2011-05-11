@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8" />
+  <title>JWD-Definitionen</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  
+  <h1>Definitionen</h1>
+  <% [:notice, :error].each do |key| %>
+    <% v = flash[key] %>
+    <% if v %>
+      <div class="<%= key %>"><%= v %></div>
+    <% end %>
+  <% end %>
+  <nav>
+    <ul>
+      <% if logged_in? %>
+        <li>Hallo, <%= current_user.email %>.</li>
+        <li><a href="<%= url "/logout" %>">Logout</a></li>
+      <% else %>
+        <li><a href="<%= url "/login" %>">Login</a></li>
+      <% end %>
+    </ul>
+  
+  </nav>
+  <%= yield %>
+
+</body>
+</html>

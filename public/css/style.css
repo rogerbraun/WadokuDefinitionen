@@ -1,0 +1,47 @@
+a:visited, a:active, a:link {
+  color: black;
+  text-decoration: none;
+
+}
+
+
+ol {
+  list-style-type: none;
+  background-color: #EBECE4;
+}
+ol,li {
+  border-style: solid solid none solid;
+  border-color: white;
+  border-width: 3px;
+}
+div.main {
+  margin: 30px;
+}
+
+.keyword {
+  display: inline;
+  font-weight: bolder;
+  font-size: 110%;
+  margin: auto;
+}
+
+.reading {
+  display: block;
+  letter-spacing: -2px;
+  text-align: left;
+  font-size: small;
+  margin: 0 8px -3px  0;
+}
+
+.defintion {
+  display: inline;
+  text-align: left;
+  vertical-align: baseline;
+  margin: 0 8px 0 10px;
+}
+.translation {
+  background-color: white;
+  list-style-type: none;
+}
+
+

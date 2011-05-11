@@ -1,0 +1,14 @@
+<dl>
+  <% @def.keywords.each do |key|%>
+  <dt><span class="reading"><%= key.reading %></span><span class="keyword"><%= key.keyword %></span></dt>
+  <% end %>
+  <dd><%= @def.definition %><br /><%= @def.translation %></dd>
+</dl>
+
+<form action="/definition/<%= @def.id %>" method="post">
+<input name="_method" type="hidden" value="put" />
+Übersetzung:<br />
+<textarea id="trans" name="trans" cols="70" rows="3"><%= @def.translation%></textarea>
+<br />
+<input type="submit" id="trans_submit" value="submit translation"/>
+</form>

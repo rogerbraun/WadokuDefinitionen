@@ -51,3 +51,27 @@ end
 get "/" do
   erb :index
 end
+
+get "/all" do
+  @keywords = Keyword.all
+  erb :show_all
+end
+
+get "/definition/:id" do
+  @def = Definition.get(params[:id])
+  erb :edit
+end
+
+put "/definition/:id" do
+  definition = Definition.get(params[:id])
+  definition.update(:translation => params[:trans])
+  if definition.save
+    status 201
+    redirect "/all"
+  else 
+    status 412
+    redirect "/definition/#{params[:id]}"
+  end
+end 
+
+

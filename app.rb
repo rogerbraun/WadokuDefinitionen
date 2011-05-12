@@ -1,4 +1,5 @@
 require "digest/sha1"
+require "digest/md5"
 
 require "./helpers/login.rb"
 require "./models/user.rb"
@@ -49,11 +50,12 @@ post "/register" do
 end
 
 get "/" do
-  erb :index
+  redirect to "/keyword"
 end
 
-get "/all" do
-  @keywords = Keyword.all
+get "/keyword" do
+  page = params[:page] || 1
+  @keywords = Keyword.page(page, :per_page => 10)
   erb :show_all
 end
 
@@ -63,14 +65,22 @@ get "/definition/:id" do
 end
 
 put "/definition/:id" do
-  definition = Definition.get(params[:id])
-  definition.update(:translation => params[:trans])
-  if definition.save
-    status 201
-    redirect "/all"
-  else 
-    status 412
-    redirect "/definition/#{params[:id]}"
+  unless logged_in?
+    flash[:error] = "Zum Speichern erst anmelden!"
+    redirect back
+  else
+    definition = Definition.get(params[:id])
+    definition.update(:translation => params[:trans])
+    definition.user ||= current_user
+    if definition.save
+      status 201
+      flash[:notice] = "Erfolgreich gespeichert."
+      redirect "/keyword"
+    else 
+      status 412
+      flash[:error] = "Das hat nicht funktioniert..."
+      redirect "/definition/#{params[:id]}"
+    end
   end
 end 
 

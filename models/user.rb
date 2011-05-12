@@ -4,6 +4,8 @@ class User
   property :id, Serial
   property :email, String, :unique => true
   property :password_hash, String
+
+  has n, :definitions
   
   def self.authenticate(params)
     User.first(:email => params[:email], :password_hash => User.encode(params[:password]))
@@ -11,6 +13,10 @@ class User
 
   def password=(pw)
     self.password_hash = User.encode(pw)
+  end
+
+  def gravatar_tag
+    "<img src='http://gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase.strip)}?d=retro' alt='#{email}'"
   end
 
   private

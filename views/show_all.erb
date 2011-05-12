@@ -1,6 +1,8 @@
 <ol>
   <%@keywords.each do |key|%>
-  <li><span class="reading"><%= key.reading %></span><span class="keyword"><%= key.keyword %></span> <a href="<%= url "/definition/#{key.definition.id}" %>"><span class="defintion"><%= key.definition.definition %></span></a></li>
-  <li class="translation"><%= key.definition.translation %></li>
+    <li><span class="reading"><%= key.reading %></span><span class="keyword"><%= key.keyword %></span> <a href="<%= url "/definition/#{key.definition.id}" %>"><span class="defintion"><%= key.definition.definition %></span></a></li>
+    <li class="translation"><%= key.definition.translation %></li>
+    <li class="username"><%= key.definition.user ? key.definition.user.email : "Noch nicht bearbeitet." %></li>
   <% end %>
 </ol>
+<%= @keywords.pager.to_html(url "/keyword") %>

@@ -8,5 +8,6 @@ gem "sinatra"
 gem "dm-core"
 gem "dm-migrations"
 gem "dm-sqlite-adapter"
+gem "dm-pager"
 
 gem "rack-flash"

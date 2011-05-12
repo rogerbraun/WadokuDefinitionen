@@ -4,6 +4,8 @@ GEM
     addressable (2.2.5)
     data_objects (0.10.5)
       addressable (~> 2.1)
+    dm-aggregates (1.1.0)
+      dm-core (~> 1.1.0)
     dm-core (1.1.0)
       addressable (~> 2.2.4)
     dm-do-adapter (1.1.0)
@@ -11,6 +13,9 @@ GEM
       dm-core (~> 1.1.0)
     dm-migrations (1.1.0)
       dm-core (~> 1.1.0)
+    dm-pager (1.1.0)
+      dm-aggregates (>= 0.10.1)
+      dm-core (>= 0.10.1)
     dm-sqlite-adapter (1.1.0)
       dm-do-adapter (~> 1.1.0)
       do_sqlite3 (~> 0.10.2)
@@ -30,6 +35,7 @@ PLATFORMS
 DEPENDENCIES
   dm-core
   dm-migrations
+  dm-pager
   dm-sqlite-adapter
   rack-flash
   sinatra

@@ -1,7 +1,7 @@
 helpers do  
 
   def logged_in?
-    session[:user_id]
+    User.get(session[:user_id])
   end
 
   def log_in(params)

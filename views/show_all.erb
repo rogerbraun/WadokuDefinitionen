@@ -1,6 +1,6 @@
 <ol>
   <%@keywords.each do |key|%>
-  <li><span class="reading"><%= key.reading %></span><span class="keyword"><%= key.keyword %></span> <a href="localhost:4567/definition/<%= key.definition.id %>"><span class="defintion"><%= key.definition.definition %></span></a></li>
+  <li><span class="reading"><%= key.reading %></span><span class="keyword"><%= key.keyword %></span> <a href="<%= url "/definition/#{key.definition.id}" %>"><span class="defintion"><%= key.definition.definition %></span></a></li>
   <li class="translation"><%= key.definition.translation %></li>
   <% end %>
 </ol>

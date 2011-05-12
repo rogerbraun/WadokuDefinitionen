@@ -60,6 +60,7 @@ get "/keyword" do
 end
 
 get "/definition/:id" do
+  session[:prev_page] = back
   @def = Definition.get(params[:id])
   erb :edit
 end
@@ -75,11 +76,11 @@ put "/definition/:id" do
     if definition.save
       status 201
       flash[:notice] = "Erfolgreich gespeichert."
-      redirect "/keyword"
+      redirect(session[:prev_page] || (to "/keyword"))
     else 
       status 412
       flash[:error] = "Das hat nicht funktioniert..."
-      redirect "/definition/#{params[:id]}"
+      redirect to "/definition/#{params[:id]}"
     end
   end
 end 

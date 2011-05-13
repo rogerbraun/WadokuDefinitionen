@@ -19,6 +19,8 @@ class User
     "<img src='http://gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase.strip)}?d=retro' alt='#{email}'"
   end
 
+
+
   private
 
   def self.encode(str)

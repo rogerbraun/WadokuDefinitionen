@@ -48,8 +48,18 @@ class Keyword
   property :reading, String
 
   belongs_to :definition
+  
+  def self.user_keywords user_email
+    user_keywords = Keyword.all(Keyword.definition.user.email => user_email) 
+    all = user_keywords.map do |key| 
+            key.JDW + "\t" + key.keyword + "\t" +
+            key.reading + "\t" + key.definition.definition + 
+            "\t" + key.definition.translation.to_s.delete("\n")
+          end
+    
+    all.join("\n")
+  end
 
 end
-
 DataMapper.finalize
 

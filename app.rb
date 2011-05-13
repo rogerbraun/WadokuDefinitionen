@@ -85,4 +85,10 @@ put "/definition/:id" do
   end
 end 
 
+get "/download" do
+  user_work = User.all.map{|user| user.email + "\n" + Keyword.user_keywords(user.email)}
+  text = user_work.join("\n")
+  attachment "user_work.txt"
+  text
+end
 

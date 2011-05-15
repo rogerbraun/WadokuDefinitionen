@@ -10,28 +10,31 @@
 </head>
 
 <body>
-  
-  <h1>Definitionen</h1>
-  <% [:notice, :error].each do |key| %>
-    <% v = flash[key] %>
-    <% if v %>
-      <div class="<%= key %>"><%= v %></div>
-    <% end %>
-  <% end %>
-  <nav>
-    <ul>
-      <% if logged_in? %>
-        <li>Hallo, <%= current_user.email %>.</li>
-        <li><%= current_user.gravatar_tag %></li>
-        <li><a href="<%= url "/logout" %>">Logout</a></li>
-      <% else %>
-        <li><a href="<%= url "/login" %>">Login</a></li>
-        <li><a href="<%= url "/register" %>">Registrieren</a></li>
+  <header> 
+    <h1>Definitionen</h1>
+    <% [:notice, :error].each do |key| %>
+      <% v = flash[key] %>
+      <% if v %>
+        <div class="<%= key %>"><%= v %></div>
       <% end %>
-    </ul>
+    <% end %>
+    <nav class="user">
+      <ul>
+        <% if logged_in? %>
+          <li>Hallo, <%= current_user.email %>.</li>
+          <li><a href="<%= url "/logout" %>">Logout</a></li>
+          <li><%= current_user.gravatar_tag %></li>
+        <% else %>
+          <li><a href="<%= url "/login" %>">Login</a></li>
+          <li><a href="<%= url "/register" %>">Registrieren</a></li>
+        <% end %>
+      </ul>
   
-  </nav>
-  <%= yield %>
+    </nav>
+  </header>
+  <div id="main">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

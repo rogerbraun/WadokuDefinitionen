@@ -44,4 +44,18 @@ div.main {
   list-style-type: none;
 }
 
+nav ul li, ul.pager li {
+  display: inline;
+}
 
+h1 {
+  float: left;
+}
+nav.user {
+  float:right;
+}
+
+
+#main {
+  clear: both;
+}

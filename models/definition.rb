@@ -12,26 +12,20 @@ class Definition
   
   def self.fill file #file = open("txt").read
     file.each_line do |line| 
-    line_array = line.split("\t")
-    puts line_array 
-  
-    unless line_array[3].gsub('"',"").strip == ""
-                                
-      if line_array[4] == "\n" #es gibt in dem Fall noch keine Übersetzung
-        definition = Definition.first_or_create(:definition => line_array[3])
-        keyword = Keyword.create(:JDW => line_array[0], :keyword => line_array[1], :reading => line_array[2])
+      line_array = line.split("\t")
     
-        definition.keywords << keyword
-        definition.save
+      unless line_array[3].gsub('"',"").strip == ""
+                                  
+        if line_array[4] == "\n" #es gibt in dem Fall noch keine Übersetzung
+          definition = Definition.first_or_create(:definition => line_array[3])
+        else
+          definition = Definition.first_or_create({:definition => line_array[3]}, {:translation => line_array[4]})
       
-      else
-        definition = Definition.first_or_create({:definition => line_array[3]}, {:translation => line_array[4]})
-        keyword = Keyword.create(:JDW => line_array[0], :keyword => line_array[1], :reading => line_array[2])
-
+        end
+        keyword = Keyword.first_or_create({:JDW => line_array[0]}, {:keyword => line_array[1], :reading => line_array[2]})
+        
         definition.keywords << keyword
-        definition.save
-    
-      end
+        keyword.save
       end
     end
   end
@@ -43,7 +37,7 @@ class Keyword
   include DataMapper::Resource
 
   property :id, Serial
-  property :JDW, String
+  property :JDW, String, :unique => true
   property :keyword, String
   property :reading, String
 

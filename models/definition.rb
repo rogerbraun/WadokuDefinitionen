@@ -4,11 +4,13 @@ class Definition
   include DataMapper::Resource
 
   property :id, Serial
-  property :definition, Text, :lazy => false
-  property :translation, Text, :lazy => false
+  property :definition, Text 
+  property :translation, Text 
   #eine Definition kann zu mehreren Schlagwörtern gehören
+  has n, :comments
   has n, :keywords
   belongs_to :user, :required => false
+
   
   def self.fill file #file = open("txt").read
     file.each_line do |line| 
@@ -55,5 +57,14 @@ class Keyword
   end
 
 end
+
+class Comment
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :comment, Text
+  property :author, String
+  belongs_to :definition, :required => false
+end 
 DataMapper.finalize
 

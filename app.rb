@@ -85,6 +85,22 @@ put "/definition/:id" do
   end
 end 
 
+post "/definition/:id/comment/new" do
+  definition = Definition.get(params[:id])
+  comment = params[:def_comment]
+  unless comment.strip.empty?
+    if logged_in? 
+    user = current_user.email
+    new_comment = Comment.create(:comment => params[:def_comment], :author => user, :definition => definition)
+    else
+    new_comment = Comment.create(:comment => params[:def_comment], :author => "Anonym", :definition => definition)  
+    end
+    redirect to "/keyword"
+  else
+    redirect to "/definition/#{params[:id]}"
+  end
+end
+
 get "/download" do
   user_work = User.all.map{|user| user.email + "\n" + Keyword.user_keywords(user.email)}
   text = user_work.join("\n")

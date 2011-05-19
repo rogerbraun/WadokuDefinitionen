@@ -4,34 +4,30 @@ class Definition
   include DataMapper::Resource
 
   property :id, Serial
-  property :definition, Text, :lazy => false
-  property :translation, Text, :lazy => false
+  property :definition, Text 
+  property :translation, Text 
   #eine Definition kann zu mehreren Schlagwörtern gehören
+  has n, :comments
   has n, :keywords
   belongs_to :user, :required => false
+
   
   def self.fill file #file = open("txt").read
     file.each_line do |line| 
-    line_array = line.split("\t")
-    puts line_array 
-  
-    unless line_array[3].gsub('"',"").strip == ""
-                                
-      if line_array[4] == "\n" #es gibt in dem Fall noch keine Übersetzung
-        definition = Definition.first_or_create(:definition => line_array[3])
-        keyword = Keyword.create(:JDW => line_array[0], :keyword => line_array[1], :reading => line_array[2])
+      line_array = line.split("\t")
     
-        definition.keywords << keyword
-        definition.save
+      unless line_array[3].gsub('"',"").strip == ""
+                                  
+        if line_array[4] == "\n" #es gibt in dem Fall noch keine Übersetzung
+          definition = Definition.first_or_create(:definition => line_array[3])
+        else
+          definition = Definition.first_or_create({:definition => line_array[3]}, {:translation => line_array[4]})
       
-      else
-        definition = Definition.first_or_create({:definition => line_array[3]}, {:translation => line_array[4]})
-        keyword = Keyword.create(:JDW => line_array[0], :keyword => line_array[1], :reading => line_array[2])
-
+        end
+        keyword = Keyword.first_or_create({:JDW => line_array[0]}, {:keyword => line_array[1], :reading => line_array[2]})
+        
         definition.keywords << keyword
-        definition.save
-    
-      end
+        keyword.save
       end
     end
   end
@@ -43,7 +39,7 @@ class Keyword
   include DataMapper::Resource
 
   property :id, Serial
-  property :JDW, String
+  property :JDW, String, :unique => true
   property :keyword, String
   property :reading, String
 
@@ -61,5 +57,14 @@ class Keyword
   end
 
 end
+
+class Comment
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :comment, Text
+  property :author, String
+  belongs_to :definition, :required => false
+end 
 DataMapper.finalize
 

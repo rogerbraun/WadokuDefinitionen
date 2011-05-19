@@ -16,11 +16,19 @@
 <br />
 <input type="submit" id="trans_submit" value="submit translation"/>
 </form>
+<% unless @def.comments.empty? %>
+<dl style="border: 2px solid yellow; ">
+  <% @def.comments.each do |comment| %>
+  <dt style="background-color: yellow; padding-left: 5px; "><%= comment.author %>: </li>
+  <dd style="padding-left: 5px;"><%= comment.comment %></li>
+  <% end %>
+</dl>
+<% else %>
 <br />
-<form action="<%= url "/definition/#{@def.id}" %>" method="post">
-<input name="_method" type="hidden" value="put" />
-Kommentar:<br />
-<textarea id="trans" name="trans" cols="70" rows="3"><%= @def.translation%></textarea>
+<% end %>
+
+<form action="<%= url "/definition/#{@def.id}/comment/new" %>" method="post">
+<textarea id="def_comment" name="def_comment" cols="70" rows="3"></textarea>
 <br />
-<input type="submit" id="trans_submit" value="submit comment"/>
+<input type="submit" id="comment_submit" value="new comment"/>
 </form>

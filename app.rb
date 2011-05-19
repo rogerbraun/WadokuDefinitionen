@@ -55,7 +55,15 @@ end
 
 get "/keyword" do
   page = params[:page] || 1
-  @keywords = Keyword.page(page, :per_page => 10)
+  @keywords = Keyword.all(:order => [:id.asc]).page(page, :per_page => 10)
+  erb :show_all
+end
+
+get "/keyword/assigned" do
+  redirect to "/keyword" unless logged_in?
+  page = params[:page] || 1
+  @keywords = Keyword.all(:order => [:id.asc], :definition => {:user => current_user}).page(page, :per_page => 10)
+  @assigned_only = true
   erb :show_all
 end
 

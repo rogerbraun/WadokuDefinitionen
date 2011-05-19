@@ -93,6 +93,11 @@ nav ul li, ul.pager li {
   display: inline;
 }
 
+ul.pager li.active a {
+  font-weight:bold;
+  color: black;
+}
+
 /*layout für Edit-Definition*/
 .edit_key {
   display: inline-block;

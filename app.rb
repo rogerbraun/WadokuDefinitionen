@@ -95,7 +95,7 @@ post "/definition/:id/comment/new" do
     else
     new_comment = Comment.create(:comment => params[:def_comment], :author => "Anonym", :definition => definition)  
     end
-    redirect to "/keyword"
+    redirect back
   else
     redirect to "/definition/#{params[:id]}"
   end

@@ -1,58 +1,118 @@
+
+/*
+für die Seite show_all
+
+*/
 a:visited, a:active, a:link {
-  color: black;
+  color: rgb(105,105,105);
   text-decoration: none;
+}
 
+td {
+  border-spacing: -2px;
+  background-color: rgb(220,220,220);
+  border-collapse: separate;
 }
 
 
-ol {
-  list-style-type: none;
-  background-color: #EBECE4;
-}
-ol,li {
-  border-style: solid solid none solid;
-  border-color: white;
-  border-width: 3px;
-}
+
+
+table {
+  width: 100%;
+ /* background-color: rgb(220,220,220);*/
+  margin:auto;
+} 
+
 div.main {
   margin: 30px;
 }
 
+.keyword_id{
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
+}
+
+
+.keyword_id_fake1{
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
+  border: 2px solid rgb(220,220,220);
+  background-color: white;
+  border-left-style: none;
+  border-right-style: none;
+}
+
+
+.keyword_id_fake2{
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
+  background-color: rgb(220,220,220);
+}
 .keyword {
-  display: inline;
+  display: inline-block;
   font-weight: bolder;
   font-size: 110%;
-  margin: auto;
+  margin-right: 10px;
 }
 
 .reading {
-  display: block;
+  display: table-cell;
   letter-spacing: -2px;
-  text-align: left;
   font-size: small;
-  margin: 0 8px -3px  0;
+  padding-left: 1px;
 }
+
+
 
 .defintion {
-  display: inline;
+  display: inline-block;
   text-align: left;
-  vertical-align: baseline;
-  margin: 0 8px 0 10px;
+  vertical-align: bottom;
 }
 .translation {
+  display: table-cell;
   background-color: white;
-  list-style-type: none;
+  border: 2px solid rgb(220,220,220);
+}
+.username{
+  padding-left: 2px; 
 }
 
+.edit, .comment {
+  text-align: center;
+  float: right;
+  padding-top: 2px;
+  padding-right: 15px;
+  padding-left: 5px;
+  font-size: 90%;
+}
 nav ul li, ul.pager li {
   display: inline;
 }
+
+/*layout für Edit-Definition*/
+.edit_key {
+  display: inline-block;
+  text-align:center;
+  background-color: white;
+  padding-left: 3px;
+}
+
+.edit_def {
+  display: table-cell;
+  
+}
+
 
 h1 {
   float: left;
 }
 nav.user {
   float:right;
+  margin-right: 5px;
 }
 
 

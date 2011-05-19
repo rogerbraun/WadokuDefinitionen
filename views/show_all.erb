@@ -1,8 +1,19 @@
-<ol>
+<table>
   <%@keywords.each do |key|%>
-    <li><span class="reading"><%= key.reading %></span><span class="keyword"><%= key.keyword %></span> <a href="<%= url "/definition/#{key.definition.id}" %>"><span class="defintion"><%= key.definition.definition %></span></a></li>
-    <li class="translation"><%= key.definition.translation %></li>
-    <li class="username"><%= key.definition.user ? key.definition.user.email : "Noch nicht bearbeitet." %></li>
+    <tr>
+      <td class="keyword_id"><%= key.id %></td>
+      <td><span class="reading"><%= key.reading %></span> <span class="keyword"><%= key.keyword %></span> <span class="defintion"><%= key.definition.definition  %></span></td>
+   </tr>
+    <tr>
+  <% unless key.definition.translation.to_s.strip.empty? %>
+      <td class="keyword_id_fake1" ></td>
+      <td class="translation"><%= key.definition.translation %></td>
   <% end %>
-</ol>
+    </tr>
+    <tr>
+      <td class="keyword_id_fake2"></td>
+      <td class="username"><%= key.definition.user ? key.definition.user.email : "Noch nicht bearbeitet." %></span><a class="edit" href="<%= url "/definition/#{key.definition.id}" %>">Edit</a> <a class="comment" href="">Comment</a></td>
+    </tr>
+  <% end %>
+</table>
 <%= @keywords.pager.to_html(url "/keyword") %>

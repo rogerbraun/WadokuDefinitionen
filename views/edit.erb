@@ -1,15 +1,26 @@
-<ol>
+<table style="border: 2px solid rgb(220,220,220);">
+  <tr>
   <% @def.keywords.each do |key|%>
-  <li><span class="reading"><%= key.reading %></span></li>
-  <li><span class="keyword"><%= key.keyword %></span></li>
+    <td class="edit_key"><span class="reading"><%= key.reading %></span><span class="keyword"><%= key.keyword %>、</span></td>
   <% end %>
-  <li><%= @def.definition %><br /><%= @def.translation %></li>
-</ol>
-
+  </tr>
+  <tr>  
+    <td class="edit_def"><%= @def.definition %><br /><%= @def.translation %></td>
+  </tr>
+</table>
+<br />
 <form action="<%= url "/definition/#{@def.id}" %>" method="post">
 <input name="_method" type="hidden" value="put" />
 Übersetzung:<br />
 <textarea id="trans" name="trans" cols="70" rows="3"><%= @def.translation%></textarea>
 <br />
 <input type="submit" id="trans_submit" value="submit translation"/>
+</form>
+<br />
+<form action="<%= url "/definition/#{@def.id}" %>" method="post">
+<input name="_method" type="hidden" value="put" />
+Kommentar:<br />
+<textarea id="trans" name="trans" cols="70" rows="3"><%= @def.translation%></textarea>
+<br />
+<input type="submit" id="trans_submit" value="submit comment"/>
 </form>

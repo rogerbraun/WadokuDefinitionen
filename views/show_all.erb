@@ -12,8 +12,8 @@
     </tr>
     <tr>
       <td class="keyword_id_fake2"></td>
-      <td class="username"><%= key.definition.user ? key.definition.user.email : "Noch nicht bearbeitet." %></span><a class="edit" href="<%= url "/definition/#{key.definition.id}" %>">Edit</a><% unless key.definition.comments.empty? %><span style="color:red;"class="comment">Comments</a></td><% else %></td><% end %>
+      <td class="username"><%= key.definition.user ? key.definition.user.email : "Noch nicht bearbeitet." %></span><a class="edit" href="<%= url "/definition/#{key.definition.id}" %>">Edit</a><% unless key.definition.comments.empty? %><span style="color:red;"class="comment"><%= "#{key.definition.comments.count} Kommentar(e)" %></span></td><% else %></td><% end %>
     </tr>
   <% end %>
 </table>
-<%= @keywords.pager.to_html(url "/keyword") %>
+<%= @keywords.pager.to_html(url(@assigned_only ? "/keyword/assigned" : "/keyword")) %>

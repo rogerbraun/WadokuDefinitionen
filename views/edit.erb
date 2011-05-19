@@ -14,7 +14,7 @@
 Übersetzung:<br />
 <textarea id="trans" name="trans" cols="70" rows="3"><%= @def.translation%></textarea>
 <br />
-<input type="submit" id="trans_submit" value="submit translation"/>
+<input type="submit" id="trans_submit" value="Übersetzung speichern"/>
 </form>
 <% unless @def.comments.empty? %>
 <dl style="border: 2px solid yellow; ">
@@ -30,5 +30,5 @@
 <form action="<%= url "/definition/#{@def.id}/comment/new" %>" method="post">
 <textarea id="def_comment" name="def_comment" cols="70" rows="3"></textarea>
 <br />
-<input type="submit" id="comment_submit" value="new comment"/>
+<input type="submit" id="comment_submit" value="Kommentar speichern"/>
 </form>

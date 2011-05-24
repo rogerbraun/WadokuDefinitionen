@@ -6,6 +6,7 @@ class Definition
   property :id, Serial
   property :definition, Text 
   property :translation, Text 
+  property :updated_at, DateTime
   #eine Definition kann zu mehreren Schlagwörtern gehören
   has n, :comments
   has n, :keywords
@@ -32,7 +33,9 @@ class Definition
     end
   end
 
-
+  before :save do
+    self.updated_at = DateTime.now
+  end
 end
 
 class Keyword

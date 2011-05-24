@@ -46,7 +46,7 @@ class Keyword
   belongs_to :definition
   
   def self.user_keywords user_email
-    user_keywords = Keyword.all(Keyword.definition.user.email => user_email) 
+    user_keywords = Keyword.all(Keyword.definition.user.email => user_email).reject{|el| el.definition.translation.strip == ""} 
     all = user_keywords.map do |key| 
             key.JDW + "\t" + key.keyword + "\t" +
             key.reading + "\t" + key.definition.definition + 

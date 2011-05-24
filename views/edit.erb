@@ -19,7 +19,7 @@
 <% unless @def.comments.empty? %>
 <dl style="border: 2px solid yellow; ">
   <% @def.comments.each do |comment| %>
-  <dt style="background-color: yellow; padding-left: 5px; "><%= comment.author %>: </li>
+  <dt style="background-color: yellow; padding-left: 5px; "><%= comment.author.to_s + (comment.updated_at ? " " + comment.updated_at.to_s : "") %>: </li>
   <dd style="padding-left: 5px;"><%= comment.comment %></li>
   <% end %>
 </dl>

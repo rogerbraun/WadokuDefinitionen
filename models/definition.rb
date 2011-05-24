@@ -64,7 +64,12 @@ class Comment
   property :id, Serial
   property :comment, Text
   property :author, String
+  property :updated_at, DateTime
   belongs_to :definition, :required => false
+
+  before :save do
+    self.updated_at = DateTime.now
+  end
 end 
 DataMapper.finalize
 

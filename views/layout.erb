@@ -22,8 +22,9 @@
       <ul>
         <% if logged_in? %>
           <li>Hallo, <%= current_user.email %>.</li>
-          <li><a href="<%= url "/keyword/assigned" %>">Zugeordnete Definitionen</a></li>
-          <li><a href="<%= url "/keyword" %>">Alle Definitionen</a></li>
+          <li><a href="<%= url "/keyword/assigned" %>">Zugeordnete Definitionen</a></li> | 
+          <li><a href="<%= url "/keyword" %>">Alle Definitionen</a></li> |
+          <li><a href="<%= url "/keyword/by_updated_at" %>">Zuletzt bearbeitet</a></li> |
           <li><a href="<%= url "/logout" %>">Logout</a></li>
           <li><%= current_user.gravatar_tag %></li>
         <% else %>

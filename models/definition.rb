@@ -36,6 +36,10 @@ class Definition
   before :save do
     self.updated_at = DateTime.now
   end
+    
+  after :save do 
+    self.keywords.update(:updated_at => DateTime.now) 
+  end
 end
 
 class Keyword
@@ -45,6 +49,7 @@ class Keyword
   property :JDW, String, :unique => true
   property :keyword, String
   property :reading, String
+  property :updated_at, String
 
   belongs_to :definition
   
@@ -72,6 +77,7 @@ class Comment
 
   before :save do
     self.updated_at = DateTime.now
+    self.definition.update(:updated_at => DateTime.now) if self.definition
   end
 end 
 DataMapper.finalize

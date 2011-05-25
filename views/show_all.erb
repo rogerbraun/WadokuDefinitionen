@@ -6,7 +6,7 @@
    </tr>
     <tr>
   <% unless key.definition.translation.to_s.strip.empty? %>
-      <td class="keyword_id_fake1" ></td>
+      <td class="keyword_id_fake1" ><%= key.updated_at %></td>
       <td class="translation"><%= key.definition.translation %></td>
   <% end %>
     </tr>
@@ -16,4 +16,4 @@
     </tr>
   <% end %>
 </table>
-<%= @keywords.pager.to_html(url(@assigned_only ? "/keyword/assigned" : "/keyword")) %>
+<%= @keywords.pager.to_html(@url) %>

@@ -9,7 +9,6 @@ require "./config/db.rb"
 enable :sessions
 use Rack::Flash
 
-
 get "/login" do
   erb :login
 end
@@ -55,15 +54,23 @@ end
 
 get "/keyword" do
   page = params[:page] || 1
-  @keywords = Keyword.all(:order => [:id.asc]).page(page, :per_page => 10)
+  @keywords = Keyword.all.page(page, :per_page => 10, :order => :id.asc)
+  @url = url "/keyword"
+  erb :show_all
+end
+
+get "/keyword/by_updated_at" do
+  page = params[:page] || 1
+  @keywords = Keyword.all.page(page, :per_page => 10, :order => :updated_at.desc)
+  @url = url "/keyword/by_updated_at" 
   erb :show_all
 end
 
 get "/keyword/assigned" do
   redirect to "/keyword" unless logged_in?
   page = params[:page] || 1
-  @keywords = Keyword.all(:order => [:id.asc], :definition => {:user => current_user}).page(page, :per_page => 10)
-  @assigned_only = true
+  @keywords = Keyword.all(:definition => {:user => current_user}).page(page, :per_page => 10, :order => :id.asc)
+  @url = url "/keyword/assigned" 
   erb :show_all
 end
 
@@ -95,14 +102,9 @@ end
 
 post "/definition/:id/comment/new" do
   definition = Definition.get(params[:id])
-  comment = params[:def_comment]
-  unless comment.strip.empty?
-    if logged_in? 
-    user = current_user.email
-    new_comment = Comment.create(:comment => params[:def_comment], :author => user, :definition => definition)
-    else
-    new_comment = Comment.create(:comment => params[:def_comment], :author => "Anonym", :definition => definition)  
-    end
+  comment = params[:def_comment].strip
+  unless comment.empty?
+    Comment.create(:comment => comment, :author => logged_in? ? current_user.email : "Anonym", :definition => definition)
     redirect back
   else
     redirect to "/definition/#{params[:id]}"

@@ -35,6 +35,16 @@ class Definition
 
   before :save do
     self.updated_at = DateTime.now
+    puts self.original_attributes
+    puts self.dirty_attributes
+    current_count = self.translation.length
+    old_translation = self.original_attributes[properties[:translation]] 
+    old_count = old_translation ?  old_translation.length  : 0
+    puts current_count
+    puts old_count
+    to_add = current_count - old_count
+    self.user.character_count += to_add
+    self.user.save
   end
     
   after :save do 

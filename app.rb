@@ -86,8 +86,8 @@ put "/definition/:id" do
     redirect back
   else
     definition = Definition.get(params[:id])
-    definition.update(:translation => params[:trans])
     definition.user ||= current_user
+    definition.translation = params[:trans]
     if definition.save
       status 201
       flash[:notice] = "Erfolgreich gespeichert."

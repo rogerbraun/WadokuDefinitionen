@@ -4,6 +4,7 @@ class User
   property :id, Serial
   property :email, String, :unique => true
   property :password_hash, String
+  property :character_count, Integer
 
   has n, :definitions
   
@@ -20,7 +21,11 @@ class User
   end
 
   def characters
-    definitions.map(&:translation).compact.map(&:length).inject(&:+)
+    unless self.character_count 
+      self.character_count = definitions.map(&:translation).compact.map(&:length).inject(&:+)
+      self.save
+    end
+    self.character_count
   end
 
   private

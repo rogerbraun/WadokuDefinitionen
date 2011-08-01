@@ -22,6 +22,7 @@
       <ul>
         <% if logged_in? %>
           <li>Hallo, <%= current_user.email %>.</li>
+          <li>Zeichen insgesamt: <%= current_user.characters %></li>
           <li><a href="<%= url "/keyword/assigned" %>">Zugeordnete Definitionen</a></li> | 
           <li><a href="<%= url "/keyword" %>">Alle Definitionen</a></li> |
           <li><a href="<%= url "/keyword/by_updated_at" %>">Zuletzt bearbeitet</a></li> |

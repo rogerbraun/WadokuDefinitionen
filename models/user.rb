@@ -19,7 +19,9 @@ class User
     "<img src='http://gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase.strip)}?d=retro' alt='#{email}'"
   end
 
-
+  def characters
+    definitions.map(&:translation).compact.map(&:length).inject(&:+)
+  end
 
   private
 
